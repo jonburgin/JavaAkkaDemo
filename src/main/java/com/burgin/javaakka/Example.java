@@ -1,10 +1,10 @@
-package com.rackspace.javaakka;
+package com.burgin.javaakka;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.rackspace.javaakka.actors.VmStatusCollectorRunner;
-import com.rackspace.javaakka.messages.VmStatusSourcesMessage;
+import com.burgin.javaakka.actors.AllServersStatusCollector;
+import com.burgin.javaakka.messages.ServersStatusRequestMessage;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,8 +21,8 @@ public class Example {
         //create or actorsystem, which keeps track of all the actors
         ActorSystem system = ActorSystem.create("VmStatusAcquisition");
         //create an actor that will spawn other actors
-        ActorRef collectorRunner = system.actorOf(new Props(VmStatusCollectorRunner.class), "collectorRunner");
+        ActorRef collectorRunner = system.actorOf(new Props(AllServersStatusCollector.class), "collectorRunner");
         //send it a message so that it stats doing it's thing.
-        collectorRunner.tell(new VmStatusSourcesMessage(urls));
+        collectorRunner.tell(new ServersStatusRequestMessage(urls));
     }
 }
