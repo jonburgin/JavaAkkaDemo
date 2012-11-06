@@ -8,16 +8,16 @@ package com.burgin.javaakka.domain;
  * To change this template use File | Settings | File Templates.
  */
 public class PizzaQuality {
-    final boolean deepDish;
+    final boolean tasty;
     final private String name;
 
-    public PizzaQuality(String name, boolean deepDish){
+    public PizzaQuality(String name, boolean tasty){
         this.name = name;
-        this.deepDish = deepDish;
+        this.tasty = tasty;
     }
 
-    public boolean isDeepDish() {
-        return deepDish;
+    public boolean isTasty() {
+        return tasty;
     }
 
     public String getName() {

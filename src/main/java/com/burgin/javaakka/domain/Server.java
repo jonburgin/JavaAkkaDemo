@@ -1,5 +1,6 @@
 package com.burgin.javaakka.domain;
 
+import java.util.List;
 /**
  * Created with IntelliJ IDEA.
  * User: jonburgin
@@ -8,4 +9,6 @@ package com.burgin.javaakka.domain;
  * To change this template use File | Settings | File Templates.
  */
 public interface Server {
+    String getName();
+    List<Pizza> getCustomerOrder();
 }

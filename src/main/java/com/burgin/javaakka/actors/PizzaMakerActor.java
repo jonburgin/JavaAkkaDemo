@@ -1,12 +1,9 @@
 package com.burgin.javaakka.actors;
 
-import akka.actor.UntypedActor;
-import com.burgin.javaakka.domain.VirtualMachine;
-import com.burgin.javaakka.domain.VirtualMachineStatus;
-import com.burgin.javaakka.messages.VirtualMachineStatusMessage;
-import com.burgin.javaakka.messages.VirtualMachineStatusRequestMessage;
-
-import javax.management.Query;
+import com.burgin.javaakka.domain.Pizza;
+import com.burgin.javaakka.domain.PizzaQuality;
+import com.burgin.javaakka.messages.PizzaMessage;
+import com.burgin.javaakka.messages.PizzaRequestMessage;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,22 +16,22 @@ public class PizzaMakerActor extends ThreadNamingActor {
 
     @Override
     public void onReceive(Object message) {
-        if(message instanceof VirtualMachineStatusRequestMessage){
-            sender().tell(processVmStatusRequestMessage((VirtualMachineStatusRequestMessage) message));
+        if(message instanceof PizzaRequestMessage){
+            sender().tell(processVmStatusRequestMessage((PizzaRequestMessage) message));
             getContext().stop(self()); //My reason for living is gone, goodbye cruel world, I gave you all I had.
         }else{
             unhandled(message);
         }
     }
 
-    private VirtualMachineStatusMessage processVmStatusRequestMessage(VirtualMachineStatusRequestMessage message) {
-        final VirtualMachine virtualMachine = ((VirtualMachineStatusRequestMessage) message).getVirtualMachine();
-        name = "[" + virtualMachine.getName() + "]";
+    private PizzaMessage processVmStatusRequestMessage(PizzaRequestMessage message) {
+        final Pizza pizza = ((PizzaRequestMessage) message).getPizza();
+        name = "[" + pizza.getName() + "]";
         setThreadName();
-        System.out.println(String.format("%s (VirtualMachineStatusRequestMessage) -> %s",threadName, name));
-        simulateComputeTime(virtualMachine.getName());
-        System.out.println(String.format("%s %s -> (VirtualMachineStatus)",threadName, name));
-        return new VirtualMachineStatusMessage(new VirtualMachineStatus(virtualMachine.getName(), Math.random() < .5));
+        System.out.println(String.format("%s (PizzaRequest) -> %s",threadName, name));
+        simulateComputeTime(pizza.getName());
+        System.out.println(String.format("%s %s -> (Pizza)",threadName, name));
+        return new PizzaMessage(new PizzaQuality(pizza.getName(), Math.random() < .5));
     }
 
     private void simulateComputeTime(String name){

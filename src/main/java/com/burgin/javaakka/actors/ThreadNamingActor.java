@@ -17,7 +17,11 @@ abstract public class ThreadNamingActor extends UntypedActor {
 
     protected void setThreadName(){
       String[] parts = Thread.currentThread().getName().split("-");
-      int threadNumber  = Integer.parseInt(parts[parts.length - 1]);
-      threadName = String.format("%"+threadNumber + "s{%d}"," ", threadNumber);
+      int n = 0;
+      try{
+        n  = Integer.parseInt(parts[parts.length - 1]) - 1;
+      }catch (NumberFormatException nfe){
+      }         //intentionally left blank
+      threadName = String.format("%"+(n>0?n*38:1) + "s{%d}"," ", n );
     }
 }

@@ -1,6 +1,6 @@
 package com.burgin.javaakka.messages;
 
-import com.burgin.javaakka.domain.VirtualMachine;
+import com.burgin.javaakka.domain.Pizza;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,13 +11,13 @@ import com.burgin.javaakka.domain.VirtualMachine;
  */
 public class PizzaRequestMessage {
 
-    private final VirtualMachine virtualMachine;
+    private final Pizza pizza;
 
-    public PizzaRequestMessage(VirtualMachine virtualMachine){
-        this.virtualMachine = virtualMachine;
+    public PizzaRequestMessage(Pizza pizza){
+        this.pizza = pizza;
     }
 
-    public VirtualMachine getVirtualMachine() {
-        return virtualMachine;
+    public Pizza getPizza() {
+        return pizza;
     }
 }

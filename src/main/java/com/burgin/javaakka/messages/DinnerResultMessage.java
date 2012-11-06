@@ -1,6 +1,6 @@
 package com.burgin.javaakka.messages;
 
-import com.burgin.javaakka.domain.VirtualMachineStatus;
+import com.burgin.javaakka.domain.PizzaQuality;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,9 +11,9 @@ import com.burgin.javaakka.domain.VirtualMachineStatus;
  */
 public class DinnerResultMessage {
     private String url;
-    private VirtualMachineStatus[] virtualMachineStatii;
+    private PizzaQuality[] virtualMachineStatii;
 
-    public DinnerResultMessage(String url, VirtualMachineStatus[] virtualMachineStatii){
+    public DinnerResultMessage(String url, PizzaQuality[] virtualMachineStatii){
         this.url = url;
         this.virtualMachineStatii = virtualMachineStatii;
     }
@@ -22,7 +22,7 @@ public class DinnerResultMessage {
         return url;
     }
 
-    public VirtualMachineStatus[] getVirtualMachineStatii() {
+    public PizzaQuality[] getVirtualMachineStatii() {
         return virtualMachineStatii;
     }
 }

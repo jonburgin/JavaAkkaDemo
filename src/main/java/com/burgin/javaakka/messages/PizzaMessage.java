@@ -1,6 +1,6 @@
 package com.burgin.javaakka.messages;
 
-import com.burgin.javaakka.domain.VirtualMachineStatus;
+import com.burgin.javaakka.domain.PizzaQuality;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,13 +10,13 @@ import com.burgin.javaakka.domain.VirtualMachineStatus;
  * To change this template use File | Settings | File Templates.
  */
 public class PizzaMessage {
-    private VirtualMachineStatus virtualMachineStatus;
+    private PizzaQuality pizzaQuality;
 
-    public PizzaMessage(VirtualMachineStatus virtualMachineStatus) {
-        this.virtualMachineStatus = virtualMachineStatus;
+    public PizzaMessage(PizzaQuality pizzaQuality) {
+        this.pizzaQuality = pizzaQuality;
     }
 
-    public VirtualMachineStatus getVirtualMachineStatus() {
-        return virtualMachineStatus;
+    public PizzaQuality getPizzaQuality() {
+        return pizzaQuality;
     }
 }

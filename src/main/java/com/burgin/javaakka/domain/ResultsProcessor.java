@@ -1,7 +1,5 @@
 package com.burgin.javaakka.domain;
 
-import com.burgin.javaakka.domain.VirtualMachineStatus;
-
 import java.util.List;
 
 /**
@@ -12,5 +10,5 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface ResultsProcessor {
-    public void process(List<VirtualMachineStatus> statuses, List<VirtualMachineError> errors);
+    public void process(List<PizzaQuality> statuses, List<VirtualMachineError> errors);
 }

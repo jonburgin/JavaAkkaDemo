@@ -3,8 +3,14 @@ package com.burgin.javaakka;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.burgin.javaakka.actors.AllServersStatusCollector;
-import com.burgin.javaakka.messages.ServersStatusRequestMessage;
+import com.burgin.javaakka.actors.PizzaMakerActor;
+import com.burgin.javaakka.actors.PizzaManagerActor;
+import com.burgin.javaakka.domain.DefaultServer;
+import com.burgin.javaakka.domain.PizzaQuality;
+import com.burgin.javaakka.domain.ResultsProcessor;
+import com.burgin.javaakka.messages.DinnerRequestMessage;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,13 +22,22 @@ import com.burgin.javaakka.messages.ServersStatusRequestMessage;
 public class Example {
 
     public static void main(String[] args){
-        String[] urls = {"http://server1", "http://server2", "http://server3"};
-
-        //create or actorsystem, which keeps track of all the actors
-        ActorSystem system = ActorSystem.create("VmStatusAcquisition");
+        //create or actorsystem, which keeps track of all the actors, message queues, and threads
+        ActorSystem system = ActorSystem.create("PizzaShop");
         //create an actor that will spawn other actors
-        ActorRef collectorRunner = system.actorOf(new Props(AllServersStatusCollector.class), "collectorRunner");
+        ActorRef collectorRunner = system.actorOf(new Props(PizzaManagerActor.class), "PizzaManagerActor");
+
+        ResultsProcessor resultsProcessor = new ResultsProcessor() {
+            @Override
+            public void process(List<PizzaQuality> statuses, List<VirtualMachineError> errors) {
+                System.out.print("\nStatus of Pizzas : ");
+                for(PizzaQuality pizzaQuality:statuses){
+                    System.out.print(String.format(" %s:%s", pizzaQuality.getName(), pizzaQuality.isTasty() ? "Yum!" : "Meh"));
+                }
+                System.out.println();
+            }
+        };
         //send it a message so that it stats doing it's thing.
-        collectorRunner.tell(new ServersStatusRequestMessage(urls));
+        collectorRunner.tell(new DinnerRequestMessage(new DefaultServer("Pat"), PizzaMakerActor.class, resultsProcessor));
     }
 }
